@@ -1,10 +1,10 @@
 export const corsOptions = {
   origin: (origin, callback) => {
-    if (!process.env.TRUSTED_ORIGINS.includes(origin) || origin.includes("localhost")) {
-      callback(new Error("Not Allowed By Cors"))
+    if (process.env.ENV === "dev" || process.env.TRUSTED_ORIGINS.includes(origin)) {
+      callback(null, true)
     }
 
-    callback(null, true)
+    callback(new Error("Not Allowed By Cors"))
   },
   OptionsSuccessStatus: 200
 }
