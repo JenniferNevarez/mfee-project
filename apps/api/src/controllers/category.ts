@@ -1,14 +1,14 @@
-import type { Category } from "../models/category"
+import type { Category } from "../models/types"
 
-const categories: Category[] = []
+export const categories: Category[] = []
 
-const findCategory = (categories: Category[], id: string): Category | void => {
+const findCategory = (id: string): Category | void => {
   return categories.find(el => el.id === id)
 }
 
 const getCategory = (req, res): void => {
   const { id } = req.params;
-  const currentCategory = findCategory(categories, id)
+  const currentCategory = findCategory(id)
 
   if (!currentCategory) return res.status(404).json({message: "Category not found"})
 
